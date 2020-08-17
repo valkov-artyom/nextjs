@@ -1,8 +1,15 @@
 import {useState, useEffect} from 'react'
 import Link from 'next/link'
 import {MainLayout} from "../layouts/Layout";
+import {IPost} from "../interfaces/post";
+import {NextPageContext} from "next";
+import axios from 'axios';
 
-export default function Posts({posts: serverPosts}) {
+interface IPagePosts {
+    posts: IPost[]
+}
+
+export default function Posts({posts: serverPosts}: IPagePosts) {
     const [posts, setPosts] = useState(serverPosts)
     useEffect(() => {
         async  function load() {
@@ -38,14 +45,20 @@ export default function Posts({posts: serverPosts}) {
     )
 }
 
-Posts.getInitialProps = async ({req}) => {
-    if (!req) {
+Posts.getInitialProps = async ({req}: NextPageContext) => {
+/*    if (!req) {
         return {posts: null}
     }
 
     const response  = await fetch('http://localhost:4200/posts');
-    const posts = await response.json();
-
+    const posts: IPost[] = await response.json();*/
+    let posts: any
+    axios.get('http://localhost:4200/posts')
+        .then((data: any) => {
+            if(data && data.data) {
+            posts.push(data)
+            }
+        })
     return {
         posts
     }

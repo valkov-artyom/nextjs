@@ -4,5 +4,8 @@
     {"id":  2, "title": "nextjs", "body":  "lorem ipsum nextjs"},
     {"id":  3, "title": "reactjs", "body":  "lorem ipsum reactjs"}
 
+  ],
+  "about" : [
+    {"title":  "Page about us"}
   ]
 }
