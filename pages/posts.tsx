@@ -46,19 +46,13 @@ export default function Posts({posts: serverPosts}: IPagePosts) {
 }
 
 Posts.getInitialProps = async ({req}: NextPageContext) => {
-/*    if (!req) {
+    if (!req) {
         return {posts: null}
     }
 
     const response  = await fetch('http://localhost:4200/posts');
-    const posts: IPost[] = await response.json();*/
-    let posts: any
-    axios.get('http://localhost:4200/posts')
-        .then((data: any) => {
-            if(data && data.data) {
-            posts.push(data)
-            }
-        })
+    const posts: IPost[] = await response.json();
+
     return {
         posts
     }
